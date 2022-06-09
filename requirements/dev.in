@@ -5,3 +5,4 @@ pre-commit
 tox
 black
 flake8
+bump2version
