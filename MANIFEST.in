@@ -13,6 +13,7 @@ recursive-include src/flask_request_guid/ templates/**/*.html
 recursive-include src/flask_request_guid/ data/*
 recursive-include src/flask_request_guid/ *.py
 recursive-include src/flask_request_guid/ *.cfg
+include src/flask_request_guid/py.typed
 
 recursive-include tests *
 recursive-exclude * __pycache__
