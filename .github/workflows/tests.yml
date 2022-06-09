@@ -26,6 +26,9 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements/*.txt'
+      - name: Install dot
+        run: sudo apt-get install -y graphviz
+        if: matrix.tox == 'docs' && matrix.os == 'ubuntu-latest'
       - name: update pip
         run: |
           pip install -U wheel
