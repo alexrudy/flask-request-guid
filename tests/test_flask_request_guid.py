@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 """Tests for `flask_request_guid` package."""
-from tkinter.messagebox import NO
-from typing import Iterator
 import uuid
-import pytest
-from flask import Flask, Response, jsonify, request
-from flask.testing import FlaskClient
+from collections.abc import Iterator
 
+import pytest
+from flask import Flask
+from flask import jsonify
+from flask import request
+from flask import Response
+from flask.testing import FlaskClient
 from flask_request_guid import FlaskRequestGUID
 
 
