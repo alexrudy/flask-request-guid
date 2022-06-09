@@ -24,6 +24,7 @@ repos:
         args: ['--django']
     -   id: trailing-whitespace
         language_version: python3
+        exclude: 'setup.cfg'
     -   id: end-of-file-fixer
         language_version: python3
     -   id: fix-encoding-pragma
