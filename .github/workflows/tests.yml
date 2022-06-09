@@ -34,6 +34,12 @@ jobs:
           pip install -U wheel
           pip install -U setuptools
           python -m pip install -U pip
+      - name: cache pre-commit
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
+        if: matrix.tox == 'style'
       - name: cache mypy
         uses: actions/cache@v3.0.3
         with:
