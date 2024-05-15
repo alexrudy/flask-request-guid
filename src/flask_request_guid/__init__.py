@@ -7,7 +7,7 @@ __version__ = "0.2.1"
 import uuid
 
 from typing import Optional
-from flask import Flask, request, Response, _app_ctx_stack
+from flask import Flask, request, Response, g
 
 __all__ = ["FlaskRequestGUID"]
 
@@ -40,7 +40,7 @@ class FlaskRequestGUID:
     @property
     def request_id(self) -> str:
         """The current request ID"""
-        return _app_ctx_stack.top.request_guid
+        return g._request_id
 
     def generate_id(self) -> str:
         """Generate a new request ID"""
@@ -55,8 +55,8 @@ class FlaskRequestGUID:
         request_id = request.headers.get(self.header_name, None)
         if request_id is None:
             request_id = self.generate_id()
+        g._request_id = request_id
         request.id = request_id  # type: ignore[attr-defined]
-        _app_ctx_stack.top.request_guid = request_id
 
     def finish_request(self, response: Response) -> Response:
         """
@@ -65,5 +65,5 @@ class FlaskRequestGUID:
         This method is internally connected to the flask :meth:`~Flask.after_request` method,
         and must return the appropriate response after modifying it.
         """
-        response.headers.setdefault(self.header_name, _app_ctx_stack.top.request_guid)
+        response.headers.setdefault(self.header_name, self.request_id)
         return response

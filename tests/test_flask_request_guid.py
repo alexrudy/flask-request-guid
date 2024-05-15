@@ -9,6 +9,7 @@ from flask import jsonify
 from flask import request
 from flask import Response
 from flask.testing import FlaskClient
+from flask.typing import ResponseValue
 from flask_request_guid import FlaskRequestGUID
 
 
@@ -19,7 +20,7 @@ def app() -> Iterator[Flask]:
     app.config.update({"TESTING": True})
 
     @app.route("/home/")
-    def home() -> Response:
+    def home() -> ResponseValue:
         return "Hello World!"
 
     @app.route("/get-request-id/")
